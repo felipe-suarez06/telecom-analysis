@@ -1,64 +1,31 @@
-# Análisis de uso de servicios de telecomunicaciones
+Análisis del uso de servicios de telecomunicaciones en México y Colombia
 
-Análisis del comportamiento de clientes de una empresa de telecomunicaciones con operaciones en México y Colombia, enfocado en el uso de llamadas y mensajes.
+¿Los clientes usan sus servicios de la misma manera según el país, la edad y el plan contratado? Para responder esta pregunta, integré datos de clientes, planes y registros de uso para explorar los patrones de llamadas y mensajes, revisar la calidad de la información y comparar distintos segmentos.
 
-El proyecto busca identificar patrones de consumo, detectar comportamientos atípicos y comprender las necesidades de distintos segmentos de clientes. Los resultados pueden ayudar a optimizar la oferta comercial y mejorar la experiencia del usuario.
+El objetivo no fue solo describir el consumo, sino convertir los datos en evidencia útil para orientar decisiones comerciales: entender qué necesidades parecen cubrir los planes actuales, dónde hay diferencias entre grupos y qué patrones merecen una revisión más profunda.
 
-## Objetivos del negocio
+El recorrido del análisis
+Comencé explorando los tres archivos para entender qué información contenía cada uno y cómo podían relacionarse. Después revisé la calidad de los datos: busqué valores faltantes o centinela, comprobé los tipos de datos y validé las fechas. Corregí o marqué las inconsistencias pertinentes antes de avanzar, para evitar que problemas de formato distorsionaran las comparaciones.
 
-- Identificar qué segmentos usan más o menos las llamadas y los mensajes.
-- Detectar valores atípicos que puedan corresponder a comportamientos inusuales, fraude o errores de registro.
-- Analizar cómo varía el uso según la edad, el país y el plan contratado.
-- Encontrar patrones que ayuden a diseñar mejores planes y mejorar la satisfacción del cliente.
+Con las fuentes preparadas, analicé el uso de llamadas y mensajes mediante estadísticas descriptivas y visualizaciones. Comparé los patrones por país, edad y plan, y utilicé histogramas y diagramas de caja para observar la distribución del consumo y localizar valores atípicos. Traté estos valores como señales para investigar —no como prueba automática de fraude o error—, ya que pueden responder a distintas causas.
 
-## Fuentes de datos
+Finalmente, reuní los resultados para evaluar qué diferencias entre segmentos podrían ser relevantes para el negocio y qué preguntas convendría explorar en una siguiente etapa.
 
-El análisis utiliza tres archivos:
+Hallazgos principales
+Completa esta sección con los resultados que obtuviste. Por ejemplo:
 
-- `plans.csv`: información de los planes disponibles, incluidos precios, minutos y datos incluidos, y costos por consumo adicional.
-- `users_latam.csv`: datos de los clientes, como edad, ciudad, fecha de registro y plan contratado.
-- `usage.csv`: detalle del uso real de los servicios, incluidas la duración de las llamadas y la longitud de los mensajes.
+Uso por país: [describe la diferencia o similitud observada].
+Uso por plan: [indica qué patrones encontraste entre planes].
+Edad y consumo: [resume si observaste alguna tendencia].
+Valores atípicos: [explica qué detectaste y cómo decidiste tratarlos].
+Limitaciones: [menciona datos faltantes, sesgos o aspectos que no se pudieron evaluar].
+¿Qué decisiones podría informar?
+Según los hallazgos, el análisis podría ayudar a la empresa a revisar si sus planes se ajustan a los patrones de uso de cada segmento y a identificar grupos cuyo comportamiento merece un estudio adicional. Las recomendaciones deben apoyarse en los resultados concretos; por ejemplo, si un grupo muestra un patrón de consumo consistente, podría ser útil evaluar una oferta adaptada y medir su impacto antes de implementarla.
 
-## Flujo de trabajo
+Datos y herramientas
+El proyecto integra tres fuentes:
 
-1. **Carga y exploración:** revisar la estructura, las columnas y los tipos de datos de cada archivo.
-2. **Evaluación de calidad:** contar valores nulos, identificar valores centinela y revisar fechas fuera de rango.
-3. **Limpieza:** reemplazar valores centinela, convertir fechas y tratar o marcar los valores faltantes según corresponda.
-4. **Estadística descriptiva:** analizar variables numéricas y categóricas, incluyendo medias, medianas y percentiles.
-5. **Visualización y detección de valores atípicos:** crear histogramas y diagramas de caja para explorar distribuciones y posibles anomalías.
-6. **Segmentación:** agrupar clientes con criterios definidos, como edad, país, plan y comportamiento de uso.
-7. **Conclusiones ejecutivas:** resumir hallazgos y proponer recomendaciones comerciales.
-8. **Publicación:** documentar el proceso en un Jupyter Notebook y compartir el proyecto en GitHub.
-
-## Herramientas
-
-- Python
-- Jupyter Notebook
-- pandas
-- NumPy
-- seaborn
-- Matplotlib
-
-## Objetivos de aprendizaje
-
-Al finalizar el proyecto, podrás:
-
-- Integrar y limpiar datos provenientes de distintas fuentes.
-- Validar datos, estandarizar tipos y detectar inconsistencias.
-- Describir el uso de llamadas y mensajes por cliente y segmento demográfico.
-- Detectar valores atípicos con métodos estadísticos y visuales.
-- Crear segmentos de clientes según edad, país y comportamiento.
-- Visualizar diferencias entre grupos y extraer conclusiones comerciales.
-- Documentar un análisis reproducible en un notebook y un README.
-
-## Estructura sugerida del repositorio
-
-```text
-telecom-analysis/
-├── data/
-│   ├── plans.csv
-│   ├── users_latam.csv
-│   └── usage.csv
-├── notebooks/
-│   └── telecom_analysis.ipynb
-└── README.md
+plans.csv: características, precios y límites de los planes.
+users_latam.csv: información de clientes, como edad, ciudad, fecha de registro y plan.
+usage.csv: registros de uso, incluidas llamadas y mensajes.
+Herramientas: Python, Jupyter Notebook, pandas, NumPy, seaborn y Matplotlib.
