@@ -11,13 +11,13 @@
     - **Uso de los planes:** aproximadamente el 65% de los clientes eligió el plan Básico y el 35% el Premium.
     - **Edad y elección del plan:** la edad no parece ser un criterio útil para diferenciar la oferta; clientes de distintas edades eligen ambos planes, aunque el Básico es el más popular.
     
-    ### **Calidad de los datos**
+    **Calidad de los datos**
     
     - En `users`, la ciudad tenía 469 valores faltantes (11.73%).
     - En `usage`, `duration` tenía 22,076 valores faltantes (55.19%) y `length`, 17,896 (44.74%). Esto podría deberse a problemas de registro.
     - En `users`, la edad incluía 55 valores inválidos de `999` (1.3%), que se reemplazaron por la mediana.
     
-    ### **Valores atípicos**
+    **Valores atípicos**
     
     Se observaron valores altos en mensajes, llamadas y minutos de llamada. En general, el plan Básico mostró más valores extremos; en minutos de llamada, también aparecieron llamadas especialmente largas en ese plan.
     
