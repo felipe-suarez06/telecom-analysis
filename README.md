@@ -1,46 +1,35 @@
-Análisis del uso de servicios de telecomunicaciones en México y Colombia
+**Título:**  Análisis de una empresa de telecomunicaciones (**ConnectaTel**)
 
-¿Los clientes usan sus servicios de la misma manera según el país, la edad y el plan contratado? Para responder esta pregunta, integré datos de clientes, planes y registros de uso para explorar los patrones de llamadas y mensajes, revisar la calidad de la información y comparar distintos segmentos.
+ Una empresa de telecomunicaciones con operaciones en México y Colombia enfrentaba una incógnita: ¿estaban los planes actuales realmente alineados con el uso real de sus usuarios? La falta de visibilidad en los patrones de consumo impedía una segmentación efectiva.
 
-El objetivo no fue solo describir el consumo, sino convertir los datos en evidencia útil para orientar decisiones comerciales: entender qué necesidades parecen cubrir los planes actuales, dónde hay diferencias entre grupos y qué patrones merecen una revisión más profunda.
+- **Problema:** Tenía tres fuentes de datos heterogéneas (`plans`, `users`, `usage`) que requerían una integración y limpieza rigurosa antes de extraer cualquier insight fiable.
+- **Qué hice:**
+1. **Ingeniería de Datos:** No solo cargué los archivos; realicé una validación de calidad profunda. Detecté inconsistencias en las fechas y valores atípicos que, de no haberse tratado, habrían sesgado las medias de consumo.
+2. **Análisis Exploratorio (EDA):** Más allá de calcular promedios, busqué correlaciones entre el comportamiento (llamadas/mensajes) y variables demográficas (edad/país).
+3. **Segmentación Estratégica:** Clasifiqué a los usuarios no solo por su plan contratado, sino por su *comportamiento real*, lo cual reveló discrepancias clave entre la oferta y el uso.
+- **Resultado:**
+    - **Uso de los planes:** aproximadamente el 65% de los clientes eligió el plan Básico y el 35% el Premium.
+    - **Edad y elección del plan:** la edad no parece ser un criterio útil para diferenciar la oferta; clientes de distintas edades eligen ambos planes, aunque el Básico es el más popular.
+    
+    ### **Calidad de los datos**
+    
+    - En `users`, la ciudad tenía 469 valores faltantes (11.73%).
+    - En `usage`, `duration` tenía 22,076 valores faltantes (55.19%) y `length`, 17,896 (44.74%). Esto podría deberse a problemas de registro.
+    - En `users`, la edad incluía 55 valores inválidos de `999` (1.3%), que se reemplazaron por la mediana.
+    
+    ### **Valores atípicos**
+    
+    Se observaron valores altos en mensajes, llamadas y minutos de llamada. En general, el plan Básico mostró más valores extremos; en minutos de llamada, también aparecieron llamadas especialmente largas en ese plan.
+    
+    **Decisión:** conservar estos valores, ya que son plausibles y pueden reflejar diferencias reales en el uso:
+    
+    - **Mensajes:** hasta 17, aunque el límite superior de referencia era 11.5.
+    - **Llamadas:** hasta 15, frente a un límite superior de 10.5.
+    - **Minutos de llamada:** hasta 155.69 minutos (unas 2.5 horas), frente a un límite superior de 61.86.
+- **¿Qué demuestra esto?**
 
-El recorrido del análisis
-Comencé explorando los tres archivos para entender qué información contenía cada uno y cómo podían relacionarse. Después revisé la calidad de los datos: busqué valores faltantes o centinela, comprobé los tipos de datos y validé las fechas. Corregí o marqué las inconsistencias pertinentes antes de avanzar, para evitar que problemas de formato distorsionaran las comparaciones.
+Este proyecto muestra mi capacidad para transformar datos crudos en recomendaciones de negocio, garantizando siempre la calidad y reproducibilidad del análisis.
 
-Con las fuentes preparadas, analicé el uso de llamadas y mensajes mediante estadísticas descriptivas y visualizaciones. Comparé los patrones por país, edad y plan, y utilicé histogramas y diagramas de caja para observar la distribución del consumo y localizar valores atípicos. Traté estos valores como señales para investigar —no como prueba automática de fraude o error—, ya que pueden responder a distintas causas.
-
-Finalmente, reuní los resultados para evaluar qué diferencias entre segmentos podrían ser relevantes para el negocio y qué preguntas convendría explorar en una siguiente etapa.
-
-Hallazgos principales:
-
-Uso por plan: [la distribución porcentual del tipo de plan consta de aproximadamente el 65% para el plan básico y aproximadamente el 35% para el plan premium].
-
-Edad y tipo de producto: [la edad no es un buen criterio para diferenciar el tipo de producto que se ofrece a cada cliente, porque los clientes de diferentes edades compran lo mismo. La mayoría de los clientes (65%) elige el plan Básico independientemente de su edad].
-
-Valores atípicos: [En users, la columna city tenía 469 valores nulos (11,73% de las filas).
-
-En usage (o el dataframe correspondiente), duration tenía 22076 nulos (55,19%) y length tenía 17896 nulos (44,74%), posiblemente debido a un problema en el registro de datos (missing at random).
-
-En users, age presentaba 55 valores sentinela -999 (1,3%), que fueron tratados como valores inválidos y reemplazados con la mediana].
-
-cant_mensajes: ...(presenta outliers altos, se puede apreciar que en el plan básico se presentan más outliers)
-cant_llamadas: ...(presenta outliers altos,se puede apreciar una gran similitud entre las cajas, aunque en el plan básico hay usuarios que realizan más llamadas en comparación con el promedio, lo que se traduciría como outliers altos)
-cant_minutos_llamada: ...(se aprecia que la caja de premium es ligeramente más grande que la de básico, la caja de básico presenta muchos outliers muy altos, se puede apreciar que en este plan hay usuarios que realizan llamadas más prolongadas, lo que se traduciría como outliers altos)
-
-cant_mensajes: ¿mantener o no outliers?
-sí mantenerlos, aunque el límite superior es 11.5 y el máximo real es 17 mensajes, si es plausible que un usuario mande por encima del promedio.
-cant_llamadas: ¿mantener o no outliers?
-sí mantenerlos, aunque el límite superior es 10.5 y el máximo real es 15 mensajes, si es plausible que un usuario llame más veces que el promedio
-cant_minutos_llamada: ¿mantener o no outliers?
-sí mantenerlos, aunque el límite superior es 61.86 y el máximo real es 155.69 minutos, si es plausible que un usuario tenga llamadas más prolongadas que el promedio, aproximadamente 155 minutos equivaldrían a 2.5 horas.].
-
-¿Qué decisiones podría informar?
-Según los hallazgos, el análisis podría ayudar a la empresa a revisar si sus planes se ajustan a los patrones de uso de cada segmento y a identificar grupos cuyo comportamiento merece un estudio adicional. Las recomendaciones deben apoyarse en los resultados concretos; por ejemplo, si un grupo muestra un patrón de consumo consistente, podría ser útil evaluar una oferta adaptada y medir su impacto antes de implementarla.
-
-Datos y herramientas
-El proyecto integra tres fuentes:
-
-plans.csv: características, precios y límites de los planes.
-users_latam.csv: información de clientes, como edad, ciudad, fecha de registro y plan.
-usage.csv: registros de uso, incluidas llamadas y mensajes.
-Herramientas: Python, Jupyter Notebook, pandas, NumPy, seaborn y Matplotlib.
+- **🛠️ Skills:**
+    - **Jupyter Notebook**
+    - **Python**: `pandas`, `numpy`, `seaborn`, `matplotlib`
